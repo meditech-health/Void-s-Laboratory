@@ -5,15 +5,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const { Resend } = require('resend');
-
-// Serve frontend
-app.use(express.static('../frontend'));
-
-// Catch all route - serve index.html for SPA
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
-});
-
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -22,7 +14,7 @@ app.use(express.json());
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/voids-lab');
 
 // User Schema
 const userSchema = new mongoose.Schema({
@@ -118,7 +110,7 @@ app.post('/api/register', async (req, res) => {
         html: `
           <h2>Welcome to Void's Laboratory!</h2>
           <p>Please verify your email by clicking the link below:</p>
-          <a href="http://localhost:3000/verify?token=${user.verificationToken}">Verify Email</a>
+          <a href="http://localhost:5000/verify?token=${user.verificationToken}">Verify Email</a>
         `
       });
     } catch (emailError) {
@@ -218,6 +210,14 @@ app.post('/api/challenges', auth, async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Server error' });
   }
+});
+
+// Serve frontend files
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+// Catch all route - serve index.html for SPA
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
