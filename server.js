@@ -213,11 +213,11 @@ app.post('/api/challenges', auth, async (req, res) => {
 });
 
 // Serve frontend files
-app.use(express.static(path.join(__dirname, '../frontend')));
+app.use(express.static(path.join(__dirname, 'frontend')));
 
-// Catch all route - serve index.html for SPA
+// Catch all route
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+  res.sendFile(path.join(__dirname, 'frontend/index.html'));
 });
 
 const PORT = process.env.PORT || 5000;
