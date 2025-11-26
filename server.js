@@ -6,6 +6,15 @@ const jwt = require('jsonwebtoken');
 const cors = require('cors');
 const { Resend } = require('resend');
 
+// Serve frontend
+app.use(express.static('../frontend'));
+
+// Catch all route - serve index.html for SPA
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/index.html'));
+});
+
+
 const app = express();
 app.use(cors());
 app.use(express.json());
