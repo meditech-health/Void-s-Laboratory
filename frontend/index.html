@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Void's Laboratory</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <header>
+            <div class="container">
+                <div class="header-content">
+                    <div class="logo">
+                        <i>🔬</i>
+                        <span>Void's Laboratory</span>
+                    </div>
+                    <nav>
+                        <ul>
+                            <li><a href="#" onclick="showSection('home')">Home</a></li>
+                            <li><a href="#" onclick="showSection('challenges')">Challenges</a></li>
+                            <li><a href="#" onclick="showSection('leaderboard')">Leaderboard</a></li>
+                        </ul>
+                    </nav>
+                    <div class="auth-buttons" id="authButtons">
+                        <button class="btn btn-outline" onclick="showSection('login')">Login</button>
+                        <button class="btn btn-primary" onclick="showSection('register')">Register</button>
+                    </div>
+                    <div class="user-menu" id="userMenu" style="display: none;">
+                        <span id="userName"></span>
+                        <button class="btn btn-outline" onclick="logout()">Logout</button>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="container">
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="hero">
+                    <h1>Master Digital Skills</h1>
+                    <p>Choose your specialization and progress through ranks</p>
+                </div>
+                
+                <div class="categories">
+                    <h2>Learning Paths</h2>
+                    <div class="category-grid">
+                        <div class="category-card" data-category="programming">
+                            <div class="category-icon">💻</div>
+                            <h3>Programming</h3>
+                            <p>Coding challenges and algorithms</p>
+                        </div>
+                        <div class="category-card" data-category="graphics">
+                            <div class="category-icon">🎨</div>
+                            <h3>Graphics Design</h3>
+                            <p>Design principles and creativity</p>
+                        </div>
+                        <div class="category-card" data-category="uiux">
+                            <div class="category-icon">📱</div>
+                            <h3>UI/UX</h3>
+                            <p>User interface and experience design</p>
+                        </div>
+                        <div class="category-card" data-category="data">
+                            <div class="category-icon">📊</div>
+                            <h3>Data Analysis</h3>
+                            <p>Statistical analysis and interpretation</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Registration Section -->
+            <section id="register" class="section">
+                <div class="auth-form">
+                    <h2>Join Void's Laboratory</h2>
+                    <form onsubmit="register(event)">
+                        <div class="form-group">
+                            <input type="text" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password (min 6 characters)" minlength="6" required>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Specialization</option>
+                                <option value="programming">Programming</option>
+                                <option value="graphics">Graphics Design</option>
+                                <option value="uiux">UI/UX</option>
+                                <option value="data">Data Analysis</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" placeholder="Admin Code (optional)">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Create Account</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Login Section -->
+            <section id="login" class="section">
+                <div class="auth-form">
+                    <h2>Welcome Back</h2>
+                    <form onsubmit="login(event)">
+                        <div class="form-group">
+                            <input type="email" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" placeholder="Password" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+            </section>
+
+            <!-- Dashboard Section -->
+            <section id="dashboard" class="section">
+                <div class="dashboard">
+                    <h2>Your Progress</h2>
+                    <div class="progress-card">
+                        <div class="rank-badge" id="currentRank">🐣 TRAINEE</div>
+                        <div class="points" id="currentPoints">0 points</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
